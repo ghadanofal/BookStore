@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="~/Dashboard/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="~/Dashboard/dist/css/adminlte.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -216,7 +217,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
                                 <li class="nav-item">
-                                    <a href="/categories/index" class="nav-link">
+                                    <a asp-controller="Categories" asp-action="Index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Category</p>
                                     </a>
@@ -246,7 +247,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
+            <h1 class="m-0">@RenderSection("title")</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -265,8 +266,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="row">
 
                         <div class="card card-primary card-outline col-12">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
+                            <div class="card-header d-flex justify-content-center">
+                                <h5 class="m-0">@RenderSection("subTitle")</h5>
+                               @RenderSection("Button", false)
                             </div>
                             <div class="card-body">
                                 @RenderBody()

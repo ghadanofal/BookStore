@@ -8,6 +8,7 @@ namespace BookStore.ViewModel
 		[Required(ErrorMessage ="plz insert name")]
 		[MaxLength(35, ErrorMessage ="name should be 35 charachter")]
 		public string Name { get; set; } = null!;
-
+		public DateTime CreatedOn { get; set; } = DateTime.Now;
+		public DateTime UpdatedOn { get; set; }
 	}
 }

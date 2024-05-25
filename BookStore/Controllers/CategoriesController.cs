@@ -9,6 +9,7 @@ namespace BookStore.Controllers
 	public class CategoriesController : Controller
 	{
 		private readonly ApplicationDbContext context;
+		private object categoryVM;
 
 		public CategoriesController(ApplicationDbContext context)
 		{
@@ -47,12 +48,26 @@ namespace BookStore.Controllers
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
-
-			return View("Create");
+			var category = context.Categories.Find(id);
+				
+			if(category == null)
+			{
+				return NotFound();
+			}
+			var viewModel = new CategoryVM
+			{
+				Id = id,
+				Name = category.Name
+			};
+			return View("Create", viewModel);
 		}
 		[HttpPost]
 		public IActionResult Edit(CategoryVM categoryVM)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View("create", categoryVM);
+			}
 			var category = context.Categories.Find(categoryVM.Id);
 			if(category == null)
 			{
@@ -64,6 +79,23 @@ namespace BookStore.Controllers
 			return RedirectToAction("Index");
 		}
 
+		public IActionResult Details(int id)
+		{
+			var category = context.Categories.Find(id);
+			if(category == null)
+			{
+				return NotFound();
+			}
+
+			var viewModel = new CategoryVM
+			{
+				Id = category.Id,
+				Name = category.Name,
+				CreatedOn = category.CreatedOn,
+				UpdatedOn = category.UpdatedOn
+			};
+			return View("Detials", viewModel);
+		}
 		public IActionResult Delete(CategoryVM categoryVM)
 		{
 

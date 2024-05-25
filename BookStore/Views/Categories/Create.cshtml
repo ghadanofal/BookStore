@@ -5,7 +5,7 @@
 	categories
 }
 @section subTitle{
-	Create
+	@(Model?.Id==null?"Create":"edit")
 }
 
 <form asp-controller="Categories" > 
@@ -15,5 +15,5 @@
         <span asp-validation-for="Name"></span>
     </div>
    
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">@(Model?.Id==null?"Add":"update")</button>
 </form>

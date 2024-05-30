@@ -1,0 +1,62 @@
+﻿@using BookStore.ViewModel
+@using BookStore.ViewModel
+@model List<BookVM>
+
+@section title {
+    Books
+}
+@section subTitle {
+    List of Books
+}
+@section Button {
+    <a class="btn btn-primary" asp-controller="Books" asp-action="Create">Create</a>
+}
+
+<div class="card-body">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+            No books available.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Publish Date</th>
+                    <th>Image</th>
+                    <th>Categories</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Publisher</td>
+                        <td>@item.Publisher</td>
+                        <td>@item.PublisherDate.ToShortDateString()</td>
+						<td><img src="~/img/books/@item.ImageURL" width="50px" /></td>
+                        <td>@string.Join(", ",@item.Categories)</td>
+                        <td>
+                            <a asp-controller="Books" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+                            <a asp-controller="Books" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger js-delete">Delete</a>
+                            <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+

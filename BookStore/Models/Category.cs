@@ -9,5 +9,7 @@ namespace BookStore.Models
 		public string Name { get; set; } = null!;
 		 public DateTime CreatedOn { get; set; }= DateTime.Now;
 		public DateTime UpdatedOn { get; set;}
+
+		public List<BookCategory> Books { get; set; } = new List<BookCategory>();
 	}
 }

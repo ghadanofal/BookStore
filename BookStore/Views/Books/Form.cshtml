@@ -1,0 +1,54 @@
+﻿@using BookStore.ViewModel
+@model BookFormVM
+
+@section title {
+	Books
+}
+@section subTitle {
+	Create
+}
+<form asp-controller="Books"  enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Title">
+        <span asp-validation-for="Title"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AutherId" class="form-label"></label>
+        <select asp-for="AutherId" class="form-control" asp-items="@Model.Authers"></select>
+        <span asp-validation-for="AutherId"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Publisher" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Publisher">
+        <span asp-validation-for="Publisher"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PublisherDate" class="form-label"></label>
+        <input type="date" class="form-control" asp-for="PublisherDate">
+        <span asp-validation-for="PublisherDate"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageURL" class="form-label"></label>
+        <input type="file" class="form-control" asp-for="ImageURL">
+        <span asp-validation-for="ImageURL"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input type="text-area" class="form-control" asp-for="Description">
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedCategories" class="form-label"></label>
+        <select asp-for="SelectedCategories" class="form-control" asp-items="@Model.Categories"></select>
+        <span asp-validation-for="SelectedCategories"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">add</button>
+</form>

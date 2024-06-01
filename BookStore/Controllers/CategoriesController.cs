@@ -18,7 +18,12 @@ namespace BookStore.Controllers
 		public IActionResult Index()
 		{
 			var result = context.Categories.ToList();
-			return View("Index",result);
+			var categoreisVM = result.Select(e => new CategoryVM
+			{
+				Id = e.Id,
+				Name = e.Name
+			}).ToList();
+			return View("Index", categoreisVM);
 		}
 
 		[HttpGet]
@@ -111,5 +116,7 @@ namespace BookStore.Controllers
 
 			
 		}
+
+		
     }
 }

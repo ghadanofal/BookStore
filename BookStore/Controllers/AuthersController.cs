@@ -17,7 +17,15 @@ namespace BookStore.Controllers
 		public IActionResult Index()
 		{
 			var authers = context.Authers.ToList();
-			var authersVM = new List<AutherVM>();
+
+			var authersVM = authers.Select(e => new AutherVM
+			{
+				Id = e.Id,
+				Name = e.Name,
+			}).ToList();
+			
+			
+			/*var authersVM = new List<AutherVM>();
 			
 			foreach(var auther in authers)
 			{
@@ -30,7 +38,7 @@ namespace BookStore.Controllers
 				};
 				authersVM.Add(autherVM);
 				
-			}
+			}*/
 			return View(authersVM);
 		}
 		
@@ -95,5 +103,38 @@ namespace BookStore.Controllers
 
         }
 
-    }
+
+		public IActionResult Details(int id)
+		{
+			var auther = context.Authers.Find(id);
+			if (auther == null)
+			{
+				return NotFound();
+			}
+
+			var autherVM = new AutherVM
+			{
+				Id = id,
+				Name = auther.Name,
+				UpdatedOn = auther.UpdatedOn,
+				CreatedOn = auther.CreatedOn,
+			};
+			
+			return View(autherVM);
+		}
+
+		public IActionResult Delete(int id)
+		{
+			var auther = context.Authers.Find(id);
+			if (auther == null)
+			{
+				return NotFound();
+			}
+
+			context.Authers.Remove(auther);
+			context.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+	}
 }
